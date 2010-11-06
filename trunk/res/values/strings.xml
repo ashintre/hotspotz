@@ -4,4 +4,6 @@
     <string name="app_name">hotspotz</string>
     <string name="name">Name of Event</string>
     <string name="type">Type of Event</string>
+    <!-- Attributes for the location service -->
+    <string name="internalServiceLbl">Internal Hotspotz Service</string>
 </resources>
