@@ -4,17 +4,41 @@
       android:versionCode="1"
       android:versionName="1.0">
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <application android:icon="@drawable/icon" android:label="@string/app_name">
         <activity android:name=".hotspotz"
                   android:label="@string/app_name">
-            <intent-filter>
+            <intent-filter>            	
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER" />                
             </intent-filter>
-	   <uses-library android:name="com.google.android.maps" /> 
+            <!-- Use this in case we need to fall-back on the OAuth Java API 
+            <intent-filter>
+            	<action android:name="android.intent.action.VIEW" />
+            	<category android:name="android.intent.category.DEFAULT" />
+            	<category android:name="android.intent.category.BROWSABLE" />
+            	<data android:scheme="hotspotz-android-app" />
+            </intent-filter>
+             -->
+ 			<uses-library android:name="com.google.android.maps" /> 
         </activity>
-
-    </application>
-
-
+        
+        <!-- Location Updater Service -->
+        <service android:enabled="true"
+        		 android:exported="false"
+        		 android:label="@string/internalServiceLbl"
+        		 android:name="com.buzzters.hotspotz.service.LocationUpdaterService">
+        		 <intent-filter>		<!-- Call this service when the following Intent is invoked -->
+        		 	<action android:name="com.buzzters.hotspotz.service.LocationUpdaterService"/>
+        		 </intent-filter>        	
+        </service>
+        <!-- Android boot up receiver -->
+        <receiver android:name="com.buzzters.hotspotz.receivers.BootLoadReceiver">
+        	<intent-filter>
+        		<action android:name="android.intent.action.BOOT_COMPLETED" />
+        		<!-- <category android:name="android.intent.category.HOME" />-->
+        	</intent-filter>
+        </receiver>
+    </application>        
 </manifest> 
