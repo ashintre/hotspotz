@@ -4,6 +4,11 @@
     <string name="app_name">hotspotz</string>
     <string name="name">Name of Event</string>
     <string name="type">Type of Event</string>
+    <string name="place">Name of Place</string> 
+    <string name="app_name1">hotspotz1</string>
+    <string name="head">HOTSPOTZ by Buzzters</string>   
+    <string name="app_name2">hotspotz_find</string>
+    <string name="app_name3">hotspotz_contacts</string>
     <!-- Attributes for the location service -->
     <string name="internalServiceLbl">Internal Hotspotz Service</string>
 </resources>
