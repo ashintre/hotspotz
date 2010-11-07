@@ -5,40 +5,25 @@
     android:layout_height="fill_parent"
     >
 <TextView  
-	android:id="@+id/name" 
+	android:id="@+id/head" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:text="@string/name"
-    />
-<EditText android:id="@+id/nametext" 
-              android:layout_width="fill_parent" 
-              android:layout_height="wrap_content" 
-              android:background="@android:drawable/editbox_background"
-              android:layout_below="@id/name" />
-<TextView  
-	android:id="@+id/type" 
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:layout_below="@id/nametext" 
-    android:text="@string/type"
-    />
-<AutoCompleteTextView android:id="@+id/autocomplete_typetext"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@android:drawable/editbox_background"
-        android:layout_below="@id/type"/>
-    
-<Button android:id="@+id/ok" 
+    android:text="@string/head"
+    />  
+  
+<Button android:id="@+id/find_place" 
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:layout_below="@id/autocomplete_typetext"
-            android:text="OK" />
+            android:layout_below="@id/head"
+            android:text="Find Place" />
 
-<Button android:layout_width="wrap_content" 
+<Button android:id="@+id/add_place"    
+			android:layout_width="wrap_content" 
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/ok"
-            android:layout_alignTop="@id/ok"
-            android:text="Cancel" />
-
-
+            android:layout_toRightOf="@id/find_place"
+            android:layout_alignTop="@id/find_place"
+            android:text="Add Current Location" />
+            
+           
 </RelativeLayout>
+
