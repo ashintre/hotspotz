@@ -1,10 +1,6 @@
 package com.buzzters.hotspotz.ui;
 
-import java.io.IOException;
-import java.net.URL;
-import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -14,16 +10,14 @@ import android.database.Cursor;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.Contacts.People;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 public class hotspotz_contacts extends Activity {
-	
-	private static final String HOTSPOTZ_GET_CONTACT_LCNS_URL = "http://hot-spotz.appspot.com/getContactLocations.do";
-	private static final String TAG = "hotspotz";
+		
+	//private static final String TAG = "hotspotz";
 	
 	private LinearLayout linear_view;
 	private int cnt = 0;
@@ -79,6 +73,9 @@ public class hotspotz_contacts extends Activity {
 		});
 		
 		Intent meetingServiceIntent = new Intent();
+		meetingServiceIntent.putExtra("emailIds", contactsList.toString());
+		// Figure out how to get this value from previous screen
+		meetingServiceIntent.putExtra("tag", this.getIntent().getStringExtra("tag"));
 		meetingServiceIntent.setAction("com.buzzters.hotspotz.service.MeetingLocatorService");
 		this.startService(meetingServiceIntent);
 		//determineFriendLocations();
