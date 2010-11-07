@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -27,6 +28,7 @@ public class hotspotz_contacts extends Activity {
 	private LinearLayout linear_view;
 	private int cnt = 0;
 	CheckBox c;
+	ArrayList<CharSequence> arrayList = new ArrayList<CharSequence>();
 	private static ArrayList<String> contactsList = new ArrayList<String>();
 	
 	//TODO: Contacts List is not getting updated. Fix it.
@@ -39,11 +41,12 @@ public class hotspotz_contacts extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+        
 		setContentView(R.layout.contact);
 		linear_view = (LinearLayout) findViewById(R.id.rel_layout);
 		ContentResolver cr = getContentResolver();
 		Cursor cur = cr.query(People.CONTENT_URI, null, null, null, null);
-
 		if (cur.getCount() > 0) {
 			while (cur.moveToNext()) {
 				cnt++;
@@ -88,29 +91,5 @@ public class hotspotz_contacts extends Activity {
 				contactsList.add(c.getText().toString());
 			}
 		}
-	}
-	
-	private void determineFriendLocations()
-	{
-		Scanner responseScanner = null;
-		try
-		{
-			StringBuilder urlBuilder = new StringBuilder(HOTSPOTZ_GET_CONTACT_LCNS_URL + "?emailIds=");
-			for(String contact : contactsList)
-			{
-				urlBuilder.append(URLEncoder.encode(contact, "UTF-8")).append(",");
-			}
-			URL getContactLocationsURL = new URL(urlBuilder.toString());
-			responseScanner = new Scanner(getContactLocationsURL.openStream());
-			Log.i(TAG, "Printing response to console");
-			while(responseScanner.hasNext())
-			{
-				Log.i(TAG, responseScanner.next());
-			}
-		}
-		catch(IOException mue)
-		{
-			mue.printStackTrace();
-		}		 
-	}
+	}	
 }
