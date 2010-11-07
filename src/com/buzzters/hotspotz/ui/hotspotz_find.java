@@ -46,8 +46,6 @@ public class hotspotz_find extends Activity {
             public void onClick(View v) {
                if((nametext.getText().length()==0)||(autocomplete_typetext.getText().length()==0))
                {
-            	   
-            	   System.out.println("true");
             	   AlertDialog.Builder builder = new AlertDialog.Builder(hotspotz_find.this);
             	   builder.setMessage("First Enter the Values")
             	          .setCancelable(false)
@@ -56,14 +54,14 @@ public class hotspotz_find extends Activity {
             	                   dialog.cancel();
             	              }
             	          });
-        		   builder.show();
-            	   //AlertDialog alert = builder.create(); 
-            	   
+        		   builder.show();            	  
                }
                else
                {
-            	   	Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz_contacts.class);                           
-               		startActivity(myIntent); 
+            	   Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz_contacts.class);
+                   myIntent.putExtra("nameOfEvent", nametext.getText().toString());
+                   myIntent.putExtra("tag", autocomplete_typetext.getText().toString());
+                   startActivity(myIntent); 
                }
             }
         });
