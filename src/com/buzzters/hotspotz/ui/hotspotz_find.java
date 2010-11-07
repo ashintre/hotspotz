@@ -1,7 +1,9 @@
 package com.buzzters.hotspotz.ui;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -33,20 +35,36 @@ public class hotspotz_find extends Activity {
         final Button button = (Button) findViewById(R.id.back);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               //System.out.println("in loop");
                Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz.class);                              
                startActivity(myIntent); 
-            	// Perform action on click
+            	
             }
         });
         
         final Button button2 = (Button) findViewById(R.id.ok);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               //System.out.println("in loop");
-               Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz_contacts.class);                           
-               startActivity(myIntent); 
-            	// Perform action on click
+               if((nametext.getText().length()==0)||(autocomplete_typetext.getText().length()==0))
+               {
+            	   
+            	   System.out.println("true");
+            	   AlertDialog.Builder builder = new AlertDialog.Builder(hotspotz_find.this);
+            	   builder.setMessage("First Enter the Values")
+            	          .setCancelable(false)
+            	          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            	              public void onClick(DialogInterface dialog, int id) {
+            	                   dialog.cancel();
+            	              }
+            	          });
+        		   builder.show();
+            	   //AlertDialog alert = builder.create(); 
+            	   
+               }
+               else
+               {
+            	   	Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz_contacts.class);                           
+               		startActivity(myIntent); 
+               }
             }
         });
 

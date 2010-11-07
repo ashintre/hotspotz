@@ -15,7 +15,9 @@ import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
@@ -34,7 +36,7 @@ public class hotspotz1 extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
     	final String[] TYPE = new String[] {"Study","Work","Hangout","Meeting"};
-    	System.out.println("in hotspotz1");
+    	//System.out.println("in hotspotz1");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_place);
@@ -46,6 +48,18 @@ public class hotspotz1 extends Activity {
         textView.setAdapter(adapter);   
         final Context ctxt = this;
         
+        final Button button1 = (Button) findViewById(R.id.back1);
+        button1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+            	
+                     Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz.class);
+                     startActivity(myIntent);
+            	
+            	// Perform action on click
+            }
+        });
+        
+        
         final Button button= (Button) findViewById(R.id.clear1);
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
@@ -55,48 +69,68 @@ public class hotspotz1 extends Activity {
             }
         });
         
-        final Button button1 = (Button) findViewById(R.id.back1);
-        button1.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-               //System.out.println("in loop");
-               Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz.class);
-               startActivity(myIntent); 
-            	// Perform action on click
-            }
-        });
-        
         final Context currentContext = this;
         final Button addCurrentLocationButton = (Button)findViewById(R.id.add_current_location);
         addCurrentLocationButton.setOnClickListener(new View.OnClickListener() 
-        {			
+        {			        	
         	LocationManager locationManager = (LocationManager) currentContext.getSystemService(Context.LOCATION_SERVICE);
         	LocationListener locationListener = null;
         	private static final String HOTSPOTZ_ADD_LOCATION_SERVLET = "http://hot-spotz.appspot.com/addMeetingPlace.do";
 			@Override
 			public void onClick(View v) {
-				// Subscribe to the Location Manager system Service
-				// Obtain location from either the GPS PROVIDER or the NETWORK PROVIDER
-				Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null ? 
-												locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) :
-													locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				if(lastKnownLocation != null)
-				{
-					addCurrentLocationToServer(lastKnownLocation);
-				}
-				else
-				{
-					// If last Known location from either of these services is null, listener for location updates
-					locationListener = new LocationListener() {
-						@Override
-						public void onLocationChanged(Location location) {								
-							addCurrentLocationToServer(location);							
-						}						
-						public void onProviderDisabled(String msg) {}			
-						public void onProviderEnabled(String msg) {}							
-						public void onStatusChanged(String arg0, int arg1, Bundle arg2) {}							
-					};
-					locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-				}
+				if((placeText.getText().length()==0)||(autocomplete_typetext1.getText().length()==0))
+	               {            	   
+	            	   System.out.println("true");
+	            	   AlertDialog.Builder builder = new AlertDialog.Builder(hotspotz1.this);
+	            	   builder.setMessage("First Enter the Values")
+	            	          .setCancelable(false)
+	            	          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	            	              public void onClick(DialogInterface dialog, int id) {
+	            	                   dialog.cancel();
+	            	              }
+	            	          });
+	        		   builder.show();
+	            	   //AlertDialog alert = builder.create(); 
+	            	   
+	               }
+	               else
+	               {
+
+	   				// Subscribe to the Location Manager system Service
+	   				// Obtain location from either the GPS PROVIDER or the NETWORK PROVIDER
+	   				Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) != null ? 
+	   												locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER) :
+	   													locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+	   				if(lastKnownLocation != null)
+	   				{
+	   					addCurrentLocationToServer(lastKnownLocation);
+	   				}
+	   				else
+	   				{
+	   					// If last Known location from either of these services is null, listener for location updates
+	   					locationListener = new LocationListener() {
+	   						@Override
+	   						public void onLocationChanged(Location location) {								
+	   							addCurrentLocationToServer(location);							
+	   						}						
+	   						public void onProviderDisabled(String msg) {}			
+	   						public void onProviderEnabled(String msg) {}							
+	   						public void onStatusChanged(String arg0, int arg1, Bundle arg2) {}							
+	   					};
+	   					locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+	   				}
+	            	   AlertDialog.Builder builder = new AlertDialog.Builder(hotspotz1.this);
+	            	   builder.setMessage("Your data has been added successfully !")
+	            	          .setCancelable(false)
+	            	          .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+	            	              public void onClick(DialogInterface dialog, int id) {
+	            	                   dialog.cancel();
+	            	              }
+	            	          });
+	        		   builder.show();
+	            	   	 
+	               }
+
 			}					
 			private void addCurrentLocationToServer(Location location)
 			{
