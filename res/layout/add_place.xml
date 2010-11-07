@@ -34,17 +34,17 @@
         android:background="@android:drawable/editbox_background"
         android:layout_below="@id/type"/>
     
-<Button android:id="@+id/ok1" 
+<Button android:id="@+id/add_current_location" 
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_below="@id/autocomplete_typetext1"
-            android:text="OK" />
+            android:text="@string/add_current_location" />
 
 <Button android:id="@+id/clear1"    
 			android:layout_width="wrap_content" 
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/ok1"
-            android:layout_alignTop="@id/ok1"
+            android:layout_toRightOf="@id/add_current_location"
+            android:layout_alignTop="@id/add_current_location"
             android:text="Clear" />
             
 

@@ -8,7 +8,7 @@ import android.util.Log;
 public class BootLoadReceiver extends BroadcastReceiver{
 
 	@Override
-	public void onReceive(Context context, Intent intent) {
+	public void onReceive(Context context, Intent intent) {		
 		Log.i("hotspotz", "In broadcastReceiver for boot Load");
 		Intent locationUpdaterServiceIntent = new Intent();
 		locationUpdaterServiceIntent.setAction("com.buzzters.hotspotz.service.LocationUpdaterService");

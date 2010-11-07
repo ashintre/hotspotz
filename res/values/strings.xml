@@ -9,6 +9,9 @@
     <string name="head">HOTSPOTZ by Buzzters</string>   
     <string name="app_name2">hotspotz_find</string>
     <string name="app_name3">hotspotz_contacts</string>
+    <string name="add_current_location">Add Current Location</string>
     <!-- Attributes for the location service -->
     <string name="internalServiceLbl">Internal Hotspotz Service</string>
+    <!-- Attributes for the meeting locator service -->
+    <string name="internalMeetingServiceLbl">Hotspotz: Meeting locator service</string>
 </resources>
