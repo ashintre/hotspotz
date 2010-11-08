@@ -1,9 +1,11 @@
 package com.buzzters.hotspotz.ui;
 
 import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +26,7 @@ public class hotspotz extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                //System.out.println("in loop");
+            	
                Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz_find.class);
                //myIntent.setClassName("com.buzzters.hotspotz.ui", "com.buzzters.hotspotz.ui.hotspotz1");
                //myIntent.setClassName("com.buzzters.hotspotz.ui", "hotspotz1");               
