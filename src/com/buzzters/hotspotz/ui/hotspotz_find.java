@@ -36,8 +36,7 @@ public class hotspotz_find extends Activity {
         button.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz.class);                              
-               startActivity(myIntent); 
-            	
+               startActivity(myIntent);             	
             }
         });
         

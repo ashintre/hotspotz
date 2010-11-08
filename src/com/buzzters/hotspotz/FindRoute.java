@@ -11,6 +11,7 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Location;
 import android.net.Uri;
 
@@ -123,7 +124,7 @@ public class FindRoute extends MapActivity {
 		
 		public NodeList getStops() {
 			try {
-				File file = new File("C:\\StopsList.xml");
+				File file = new File("C:\\StopsList.xml");				
 				DocumentBuilderFactory docbf = DocumentBuilderFactory.newInstance();
 				DocumentBuilder db = docbf.newDocumentBuilder();
 				Document doc = db.parse(file);

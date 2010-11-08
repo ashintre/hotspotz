@@ -2,6 +2,8 @@ package com.buzzters.hotspotz.ui;
 
 import java.util.ArrayList;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
 import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
@@ -12,6 +14,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.Contacts.People;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,7 +22,7 @@ import android.widget.LinearLayout;
 
 public class hotspotz_contacts extends Activity {
 		
-	//private static final String TAG = "hotspotz";
+	private static final String TAG = "hotspotz";
 	
 	private LinearLayout linear_view;
 	private int cnt = 0;
@@ -95,14 +98,14 @@ public class hotspotz_contacts extends Activity {
 				find_checked();
 			}
 		});
-		
+	//	getGoogleAccount();
 		Intent meetingServiceIntent = new Intent();
 		meetingServiceIntent.putExtra("emailIds", contactsList.toString());
 		// Figure out how to get this value from previous screen
 		meetingServiceIntent.putExtra("tag", this.getIntent().getStringExtra("tag"));
+		meetingServiceIntent.putExtra("nameOfEvent", this.getIntent().getStringExtra("nameOfEvent"));
 		meetingServiceIntent.setAction("com.buzzters.hotspotz.service.MeetingLocatorService");
-		this.startService(meetingServiceIntent);
-		//determineFriendLocations();
+		this.startService(meetingServiceIntent);		
 	}
 
 	public void find_checked() {
@@ -114,4 +117,14 @@ public class hotspotz_contacts extends Activity {
 		}
 		System.out.println(contactnumbersList);
 	}	
+	
+	
+	/*private void getGoogleAccount()
+	{
+		AccountManager accManager = (AccountManager)this.getSystemService(ACCOUNT_SERVICE);
+		for(Account acc : accManager.getAccountsByType("com.google"))
+		{
+			Log.i(TAG, "Account Name : " + acc.name + ", Account Type : " + acc.type);
+		}
+	}*/
 }
