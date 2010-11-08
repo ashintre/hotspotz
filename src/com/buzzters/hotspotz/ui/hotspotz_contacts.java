@@ -7,6 +7,8 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.Contacts.People;
@@ -53,17 +55,30 @@ public class hotspotz_contacts extends Activity {
 
 				// Add the list of contact email Ids to a list of check boxes so that the user can select friends he wants
 				CheckBox cbx = new CheckBox(this);
-				cbx.setText(emailCur.getString(emailCur.getColumnIndex(People.PRIMARY_EMAIL_ID)));
+				cbx.setText(emailCur.getString(6));
 				cbx.setId(cnt);
+				cbx.setTextColor(Color.rgb(255, 69, 0));
 				linear_view.addView(cbx);
 				emailCur.close();
 			}
 		}
 		Button btn = new Button(this);
 		btn.setText("Ok");
+		btn.setTextColor(Color.rgb(160, 82, 45));
+		btn.setTypeface(Typeface.DEFAULT_BOLD);
 		btn.setId(1000);
 		linear_view.addView(btn);
 		setContentView(linear_view);
+		
+		final Context ctxt = this;
+		final Button button1 = (Button) findViewById(R.id.back2);
+        button1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+               Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz.class);                              
+               startActivity(myIntent); 
+            	
+            }
+        });
 
 		final Button button = (Button) findViewById(1000);
 		button.setOnClickListener(new View.OnClickListener() {
@@ -88,5 +103,6 @@ public class hotspotz_contacts extends Activity {
 				contactsList.add(c.getText().toString());
 			}
 		}
+		System.out.println(contactsList);
 	}	
 }
