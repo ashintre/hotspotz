@@ -8,6 +8,7 @@
     <string name="app_name1">hotspotz1</string>
     <string name="userid">Enter your Email ID</string>
     <string name="head">HOTSPOTZ</string>
+    <string name="link">http://www.gmail.com</string>
     <string name="head_find">FIND PLACES</string>  
     <string name="head_add">ADD CURRENT LOCATION</string> 
     <string name="head_contacts">CONTACTS</string> 
