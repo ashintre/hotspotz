@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<stops>
+<stop id="1">
+<stop_name>Fitten Hall</stop_name>
+<latitude>33.77804</latitude>
+<longitude>-84.40341</longitude>
+<shortcode>fitten</shortcode>
+<routes>RB</routes>
+</stop>
+<stop id="2">
+<stop_name>McMillan And 8th Street</stop_name>
+<latitude>33.7795</latitude>
+<longitude>-84.40403</longitude>
+<shortcode>mcm8th</shortcode>
+<routes>RB</routes>
+</stop>
+<stop id="3">
+<stop_name>8th Street And Hemphill Ave</stop_name>
+<latitude>33.77961</latitude>
+<longitude>-84.40247</longitude>
+<shortcode>8thhemp</shortcode>
+<routes>RB</routes>
+</stop>
+<stop id="4">
+<stop_name>Ferst Dr And Hemphill Ave</stop_name>
+<latitude>33.77827</latitude>
+<longitude>-84.40116</longitude>
+<shortcode>fershemrt</shortcode>
+<routes>RGBT</routes>
+</stop>
+<stop id="5">
+<stop_name>Ferst Dr And State Street</stop_name>
+<latitude>33.77818</latitude>
+<longitude>-84.39901</longitude>
+<shortcode>fersstmrt</shortcode>
+<routes>RBG</routes>
+</stop>
+<stop id="6">
+<stop_name>Ferst Dr And Atlantic Drive</stop_name>
+<latitude>33.77813</latitude>
+<longitude>-84.39770</longitude>
+<shortcode>fersatmrt</shortcode>
+<routes>RBT</routes>
+</stop>
+<stop id="7">
+<stop_name>Ferst Dr And Cherry Street</stop_name>
+<latitude>33.77752</latitude>
+<longitude>-84.39566</longitude>
+<shortcode>ferschmrt</shortcode>
+<routes>RBT</routes>
+</stop>
+<stop id="8">
+<stop_name>Ferst Dr And Fowler Street</stop_name>
+<latitude>33.77681</latitude>
+<longitude>-84.39350</longitude>
+<shortcode>5thfowl</shortcode>
+<routes>RBT</routes>
+</stop>
+<stop id="9">
+<stop_name>Techwood Dr And 5th Street</stop_name>
+<latitude>33.77670</latitude>
+<longitude>-84.39197</longitude>
+<shortcode>tech5th</shortcode>
+<routes>RBT</routes>
+</stop>
+<stop id="10">
+<stop_name>Techwood Dr And 4th Street</stop_name>
+<latitude>33.77522</latitude>
+<longitude>-84.39197</longitude>
+<shortcode>tech4th</shortcode>
+<routes>RB</routes>
+</stop>
+<stop id="11">
+<stop_name>Techwood Dr And Bobby Dodd Way</stop_name>
+<latitude>33.77376</latitude>
+<longitude>-84.39187</longitude>
+<shortcode>techbob</shortcode>
+<routes>RB</routes>
+</stop>
+<stop id="12">
+<stop_name>Techwood Dr And North Ave</stop_name>
+<latitude>33.77116</latitude>
+<longitude>-84.39193</longitude>
+<shortcode>technorth</shortcode>
+<routes>RB</routes>
+</stop>
+<stop id="13">
+<stop_name>North Avenue Apartments</stop_name>
+<latitude>33.76994</latitude>
+<longitude>-84.39101</longitude>
+<shortcode>nortavea_a</shortcode>
+<routes>RB</routes>
+</stop>
+<stop id="14">
+<stop_name>Student Centre</stop_name>
+<latitude>33.77383</latitude>
+<longitude>-84.39856</longitude>
+<shortcode>centrstud</shortcode>
+<routes>RGB</routes>
+</stop>
+<stop id="15">
+<stop_name>CRC</stop_name>
+<latitude>33.77524</latitude>
+<longitude>-84.40281</longitude>
+<shortcode>765femrt</shortcode>
+<routes>RGBT</routes>
+</stop>
+<stop id="16">
+<stop_name>14th Bus Yard</stop_name>
+<latitude>33.78650</latitude>
+<longitude>-84.40536</longitude>
+<shortcode>14thmcmi</shortcode>
+<routes>G</routes>
+</stop>
+<stop id="17">
+<stop_name>14th Street And State Street</stop_name>
+<latitude>33.78590</latitude>
+<longitude>-84.3979</longitude>
+<shortcode>14thstat</shortcode>
+<routes>G</routes>
+</stop>
+<stop id="18">
+<stop_name>GLC</stop_name>
+<latitude>33.78155</latitude>
+<longitude>-84.39625</longitude>
+<shortcode>glc</shortcode>
+<routes>G</routes>
+</stop>
+<stop id="19">
+<stop_name>Cherry Street And Ferst Drive</stop_name>
+<latitude>33.77228</latitude>
+<longitude>-84.39566</longitude>
+<shortcode>cherferst</shortcode>
+<routes>RGB</routes>
+</stop>
+<stop id="20">
+<stop_name>NARA</stop_name>
+<latitude>33.76993</latitude>
+<longitude>-84.40281</longitude>
+<shortcode>nara</shortcode>
+<routes>G</routes>
+</stop>
+<stop id="21">
+<stop_name>TEP</stop_name>
+<latitude>33.76927</latitude>
+<longitude>-84.4027</longitude>
+<shortcode>tep_d</shortcode>
+<routes>G</routes>
+</stop>
+<stop id="22">
+<stop_name>10th Street And Hemphill Ave</stop_name>
+<latitude>33.78600</latitude>
+<longitude>-84.40397</longitude>
+<shortcode>10thhemp</shortcode>
+<routes>G</routes>
+</stop>
+<stop id="23">
+<stop_name>Hemphill Ave And Currant Street</stop_name>
+<latitude>33.78416</latitude>
+<longitude>-84.40576</longitude>
+<shortcode>hempcurr</shortcode>
+<routes>G</routes>
+</stop>
+<stop id="24">
+<stop_name>Technology Square</stop_name>
+<latitude>33.77682</latitude>
+<longitude>-84.38934</longitude>
+<shortcode>techrec</shortcode>
+<routes>T</routes>
+</stop>
+<stop id="25">
+<stop_name>Publix Supermarket</stop_name>
+<latitude>33.78058</latitude>
+<longitude>-84.38873</longitude>
+<shortcode>publix</shortcode>
+<routes>T</routes>
+</stop>
+<stop id="26">
+<stop_name>MARTA Midtown</stop_name>
+<latitude>33.78068</latitude>
+<longitude>-84.38663</longitude>
+<shortcode>marta</shortcode>
+<routes>T</routes>
+</stop>
+<stop id="27">
+<stop_name>Academy of Medicine</stop_name>
+<latitude>33.77888</latitude>
+<longitude>-84.38709</longitude>
+<shortcode>wpe7mrt</shortcode>
+<routes>T</routes>
+</stop>
+<stop id="28">
+<stop_name>North Deck</stop_name>
+<latitude>33.77964</latitude>
+<longitude>-84.39912</longitude>
+<shortcode>bake</shortcode>
+<routes>G</routes>
+</stop>
+</stops>
