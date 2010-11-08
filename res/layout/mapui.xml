@@ -3,27 +3,35 @@
     android:id="@+id/map_relative_layout"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">         
+    android:layout_height="fill_parent"
+    android:background="@drawable/background">         
             
 <TextView android:id="@+id/event_name"
 		  android:layout_width="fill_parent" 
-    	  android:layout_height="wrap_content" />
+    	  android:layout_height="wrap_content"
+    	  android:textColor="#FFA500" />
     	              
 <TextView android:id="@+id/best_place_to_meet"
 		  android:layout_below="@id/event_name"
 		  android:layout_width="fill_parent" 
-    	  android:layout_height="wrap_content" />
+    	  android:layout_height="wrap_content"
+    	  android:textColor="#FFA500" />
 
 <Button android:id="@+id/show_route" 
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:layout_below="@id/best_place_to_meet"
+            android:layout_alignParentBottom="true"
+            android:textColor="#993300" 
+            android:textStyle="bold"
             android:text="Show Route" />
             
 <Button android:id="@+id/show_google_map" 
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_toRightOf="@id/show_route"
+            android:layout_alignParentBottom="true"
+            android:textColor="#993300" 
+            android:textStyle="bold"
             android:text="Show Destination in Map" />
              
 </RelativeLayout>

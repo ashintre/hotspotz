@@ -58,7 +58,7 @@ public class MeetingLocatorService extends Service {
 	}
 
 	@Override
-	public void onStart(Intent intent, int startId) {
+	public void onStart(Intent intent, int startId) {		
 		// TODO: Get the contactsList from the intent
 		List<GeoPoint> friendLocations = determineFriendLocations();
 		String tag = intent.getStringExtra("tag");
@@ -68,16 +68,15 @@ public class MeetingLocatorService extends Service {
 		String bestRouteMap = getBestRouteForUser(friendLocations.get(0).getLatitudeE6()/1E6, friendLocations.get(0).getLongitudeE6()/1E6,
 									bestLocationToMeet.getLatitudeE6()/1E6, bestLocationToMeet.getLongitudeE6()/1E6);
 		
-		Intent resultsDisplayIntent = new Intent();
-		resultsDisplayIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-		resultsDisplayIntent.setAction("com.buzzters.hotspotz.ui.HotSpotzMapUI");
+		Intent resultsDisplayIntent = new Intent(getApplication(), com.buzzters.hotspotz.ui.HotSpotzMapUI.class);
+		resultsDisplayIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);		
 		resultsDisplayIntent.putExtra("nameOfEvent", intent.getStringExtra("nameOfEvent"));
 		resultsDisplayIntent.putExtra("nextBusURL", bestRouteMap);
 		resultsDisplayIntent.putExtra("destinationLatitude", bestLocationToMeet.getLatitudeE6()/1E6);
 		resultsDisplayIntent.putExtra("destinationLongitude", bestLocationToMeet.getLongitudeE6()/1E6);
 		resultsDisplayIntent.putExtra("bestPlaceToMeet", 
 				locationTagDetailsMap.get(bestLocationToMeet).split(USER_DETAIL_DELIMITER)[1]);
-		this.startActivity(resultsDisplayIntent);
+		getApplication().startActivity(resultsDisplayIntent);
 	}
 
 	private List<GeoPoint> determineFriendLocations() {
