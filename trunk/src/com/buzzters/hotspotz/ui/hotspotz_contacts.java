@@ -26,6 +26,7 @@ public class hotspotz_contacts extends Activity {
 	CheckBox c;
 	ArrayList<CharSequence> arrayList = new ArrayList<CharSequence>();
 	private static ArrayList<String> contactsList = new ArrayList<String>();
+	private static ArrayList<String> contactnumbersList = new ArrayList<String>();
 	
 	//TODO: Contacts List is not getting updated. Fix it.
 	static
@@ -47,12 +48,19 @@ public class hotspotz_contacts extends Activity {
 			while (cur.moveToNext()) {
 				cnt++;
 				String id = cur.getString(cur.getColumnIndex(People._ID));
+				
+					Cursor pCur = cr.query(
+							Contacts.Phones.CONTENT_URI, 
+							null, 
+							Contacts.Phones.PERSON_ID +" = ?", 
+							new String[]{id}, null);
+					
 				Cursor emailCur = cr.query(
 						Contacts.ContactMethods.CONTENT_EMAIL_URI, null,
 						Contacts.ContactMethods.PERSON_ID + " = ?",
 						new String[] { id }, null);
 				emailCur.moveToFirst();
-
+				pCur.moveToFirst();
 				// Add the list of contact email Ids to a list of check boxes so that the user can select friends he wants
 				CheckBox cbx = new CheckBox(this);
 				cbx.setText(emailCur.getString(6));
@@ -60,6 +68,7 @@ public class hotspotz_contacts extends Activity {
 				cbx.setTextColor(Color.rgb(255, 69, 0));
 				linear_view.addView(cbx);
 				emailCur.close();
+				contactnumbersList.add(pCur.getString(7));
 			}
 		}
 		Button btn = new Button(this);
@@ -103,6 +112,6 @@ public class hotspotz_contacts extends Activity {
 				contactsList.add(c.getText().toString());
 			}
 		}
-		System.out.println(contactsList);
+		System.out.println(contactnumbersList);
 	}	
 }
