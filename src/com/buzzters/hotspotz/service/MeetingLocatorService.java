@@ -60,9 +60,14 @@ public class MeetingLocatorService extends Service {
 	@Override
 	public void onStart(Intent intent, int startId) {		
 		// TODO: Get the contactsList from the intent
+		if(intent.getStringArrayListExtra("emailIds").size() > 1)
+		{
+			// We correctly obtained all contacts list
+			contactsList = intent.getStringArrayListExtra("emailIds");
+		}		
 		List<GeoPoint> friendLocations = determineFriendLocations();
 		String tag = intent.getStringExtra("tag");
-		List<GeoPoint> tagLocations = determineTagLocations(tag);
+		List<GeoPoint> tagLocations = determineTagLocations(tag);		
 		
 		GeoPoint bestLocationToMeet = computePlace(friendLocations, tagLocations).get(0);
 		String bestRouteMap = getBestRouteForUser(friendLocations.get(0).getLatitudeE6()/1E6, friendLocations.get(0).getLongitudeE6()/1E6,
@@ -72,8 +77,8 @@ public class MeetingLocatorService extends Service {
 		resultsDisplayIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);		
 		resultsDisplayIntent.putExtra("nameOfEvent", intent.getStringExtra("nameOfEvent"));
 		resultsDisplayIntent.putExtra("nextBusURL", bestRouteMap);
-		resultsDisplayIntent.putExtra("destinationLatitude", bestLocationToMeet.getLatitudeE6()/1E6);
-		resultsDisplayIntent.putExtra("destinationLongitude", bestLocationToMeet.getLongitudeE6()/1E6);
+		resultsDisplayIntent.putExtra("destinationLatitude", Double.valueOf(bestLocationToMeet.getLatitudeE6()/1E6));
+		resultsDisplayIntent.putExtra("destinationLongitude",Double.valueOf(bestLocationToMeet.getLongitudeE6()/1E6));
 		resultsDisplayIntent.putExtra("bestPlaceToMeet", 
 				locationTagDetailsMap.get(bestLocationToMeet).split(USER_DETAIL_DELIMITER)[1]);
 		getApplication().startActivity(resultsDisplayIntent);
@@ -100,11 +105,8 @@ public class MeetingLocatorService extends Service {
 			for (String userDetails : response.split(USER_DELIMITER)) {
 				String userLocation[] = userDetails
 						.split(USER_DETAIL_DELIMITER);
-				int latitudeE6 = Integer.parseInt(userLocation[2].replace(".",
-						"")); // Remove the decimal point to convert to micro
-								// degrees is the current assumption.
-				int longitudeE6 = Integer.parseInt(userLocation[3].replace(".",
-						""));
+				int latitudeE6 = (int)(Double.parseDouble(userLocation[2]) * 1E6);
+				int longitudeE6 = (int)(Double.parseDouble(userLocation[3]) * 1E6);
 				GeoPoint geoPoint = new GeoPoint(latitudeE6, longitudeE6);
 				friendLocations.add(geoPoint);
 			}
@@ -130,12 +132,8 @@ public class MeetingLocatorService extends Service {
 			for (String tag_Locations : response.split(USER_DELIMITER)) {
 				String tagLocationDetails[] = tag_Locations
 						.split(USER_DETAIL_DELIMITER);
-				int latitudeE6 = Integer.parseInt(tagLocationDetails[2]
-						.replace(".", "")); // Remove the decimal point to
-											// convert to micro degrees is the
-											// current assumption.
-				int longitudeE6 = Integer.parseInt(tagLocationDetails[3]
-						.replace(".", ""));
+				int latitudeE6 = (int)(Double.parseDouble(tagLocationDetails[2]) * 1E6);
+				int longitudeE6 = (int)(Double.parseDouble(tagLocationDetails[3]) * 1E6);
 				GeoPoint geoPoint = new GeoPoint(latitudeE6, longitudeE6);
 				tagLocations.add(geoPoint);
 				locationTagDetailsMap.put(geoPoint, tag_Locations);

@@ -38,13 +38,13 @@ public class HotSpotzMapUI extends Activity
         showGoogleMapsButton.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {			
-				Intent showGoogleMapsIntent = new Intent(Intent.ACTION_VIEW);
-				/*String googleStreetViewUri = "geo:" + currentActivity.getIntent().getDoubleExtra("destinationLatitude", -83.0) +
-				"," + currentActivity.getIntent().getDoubleExtra("destinationLongitude", 33.0) + "?z=18";*/
-				String googleStreetViewUri = "geo:33.778425,-84.398856?z=18";
-				/*String googleStreetViewUri = "google.streetview:cbll=" + currentActivity.getIntent().getStringExtra("destinationLatitude") +
-												"," + currentActivity.getIntent().getStringExtra("destinationLongitude") + "&cbp=1," +
-												"0,,0,1.0,mz=18";*/
+				Intent showGoogleMapsIntent = new Intent(Intent.ACTION_VIEW);				
+				Double lat = currentActivity.getIntent().getDoubleExtra("destinationLatitude", 33.778425);
+				Double longtd = currentActivity.getIntent().getDoubleExtra("destinationLongitude", -84.398856);
+				//String googleStreetViewUri = "geo:" + lat + "," + longtd + "?z=18";
+				String googleStreetViewUri = "google.streetview:cbll=" + lat +
+												"," + longtd + "&cbp=1," +
+												"0,,0,1.0,mz=18";
 				showGoogleMapsIntent.setData(Uri.parse(googleStreetViewUri));
 				currentActivity.startActivity(showGoogleMapsIntent);
 			}

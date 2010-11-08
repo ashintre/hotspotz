@@ -20,7 +20,7 @@ public class hotspotz_find extends Activity {
     @Override
     
     public void onCreate(Bundle savedInstanceState) {
-    	final String[] TYPE = new String[] {"Study","Work","Hangout","Meeting"};
+    	final String[] TYPE = new String[] {"Study","Coffee","Hangout","Meeting"};
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_place);
@@ -60,6 +60,7 @@ public class hotspotz_find extends Activity {
                else
                {
             	   Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz_contacts.class);
+            	   myIntent.putExtra("myEmailId", userid_text.getText().toString());
                    myIntent.putExtra("nameOfEvent", nametext.getText().toString());
                    myIntent.putExtra("tag", autocomplete_typetext.getText().toString());
                    startActivity(myIntent); 

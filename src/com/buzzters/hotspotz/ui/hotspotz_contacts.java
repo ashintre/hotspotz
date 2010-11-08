@@ -2,12 +2,8 @@ package com.buzzters.hotspotz.ui;
 
 import java.util.ArrayList;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
 import android.app.Activity;
-import android.app.PendingIntent;
 import android.content.ContentResolver;
-import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Color;
@@ -15,8 +11,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.provider.Contacts;
 import android.provider.Contacts.People;
-import android.util.Log;
-import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -89,18 +83,19 @@ public class hotspotz_contacts extends Activity {
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                Intent myIntent=new Intent(currentActivity, com.buzzters.hotspotz.ui.hotspotz.class);                              
-               startActivity(myIntent); 
-            	
+               startActivity(myIntent);            	
             }
         });
 
 		final Button button = (Button) findViewById(1000);
 		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				
+				// Current user emailId is on top of the list
+				contactsList.clear();
+				contactsList.add(currentActivity.getIntent().getStringExtra("myEmailId"));
 				find_checked();
 				Intent meetingServiceIntent = new Intent();
-				meetingServiceIntent.putExtra("emailIds", contactsList.toString());
+				meetingServiceIntent.putExtra("emailIds", contactsList);
 				// Figure out how to get this value from previous screen
 				meetingServiceIntent.putExtra("tag", currentActivity.getIntent().getStringExtra("tag"));
 				meetingServiceIntent.putExtra("nameOfEvent", currentActivity.getIntent().getStringExtra("nameOfEvent"));
@@ -119,7 +114,6 @@ public class hotspotz_contacts extends Activity {
 			}
 		}
 		System.out.println(contactnumbersList);
-		
 	}	
 	
 	
