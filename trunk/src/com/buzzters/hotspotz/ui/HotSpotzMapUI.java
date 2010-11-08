@@ -41,7 +41,7 @@ public class HotSpotzMapUI extends Activity
 				Intent showGoogleMapsIntent = new Intent(Intent.ACTION_VIEW);
 				/*String googleStreetViewUri = "geo:" + currentActivity.getIntent().getDoubleExtra("destinationLatitude", -83.0) +
 				"," + currentActivity.getIntent().getDoubleExtra("destinationLongitude", 33.0) + "?z=18";*/
-				String googleStreetViewUri = "geo:33.77652,-84.38852?z=18";
+				String googleStreetViewUri = "geo:33.778425,-84.398856?z=18";
 				/*String googleStreetViewUri = "google.streetview:cbll=" + currentActivity.getIntent().getStringExtra("destinationLatitude") +
 												"," + currentActivity.getIntent().getStringExtra("destinationLongitude") + "&cbp=1," +
 												"0,,0,1.0,mz=18";*/
