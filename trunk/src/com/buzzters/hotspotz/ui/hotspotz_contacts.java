@@ -84,11 +84,11 @@ public class hotspotz_contacts extends Activity {
 		linear_view.addView(btn);
 		setContentView(linear_view);
 		
-		final Context ctxt = this;
+		final Activity currentActivity = this;
 		final Button button1 = (Button) findViewById(R.id.back2);
         button1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               Intent myIntent=new Intent(ctxt, com.buzzters.hotspotz.ui.hotspotz.class);                              
+               Intent myIntent=new Intent(currentActivity, com.buzzters.hotspotz.ui.hotspotz.class);                              
                startActivity(myIntent); 
             	
             }
@@ -99,16 +99,16 @@ public class hotspotz_contacts extends Activity {
 			public void onClick(View v) {
 				
 				find_checked();
+				Intent meetingServiceIntent = new Intent();
+				meetingServiceIntent.putExtra("emailIds", contactsList.toString());
+				// Figure out how to get this value from previous screen
+				meetingServiceIntent.putExtra("tag", currentActivity.getIntent().getStringExtra("tag"));
+				meetingServiceIntent.putExtra("nameOfEvent", currentActivity.getIntent().getStringExtra("nameOfEvent"));
+				meetingServiceIntent.setAction("com.buzzters.hotspotz.service.MeetingLocatorService");
+				currentActivity.startService(meetingServiceIntent);
 			}
 		});
-	//	getGoogleAccount();
-		Intent meetingServiceIntent = new Intent();
-		meetingServiceIntent.putExtra("emailIds", contactsList.toString());
-		// Figure out how to get this value from previous screen
-		meetingServiceIntent.putExtra("tag", this.getIntent().getStringExtra("tag"));
-		meetingServiceIntent.putExtra("nameOfEvent", this.getIntent().getStringExtra("nameOfEvent"));
-		meetingServiceIntent.setAction("com.buzzters.hotspotz.service.MeetingLocatorService");
-		this.startService(meetingServiceIntent);		
+	//	getGoogleAccount();			
 	}
 
 	public void find_checked() {
