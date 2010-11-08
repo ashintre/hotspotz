@@ -3,27 +3,36 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/background"
     >
 <TextView  
 	android:id="@+id/head" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
     android:text="@string/head"
+    android:textSize="50px"
+    android:textColor="#FF7F00"
+    android:textStyle="bold"
+    android:typeface="serif"
     />  
   
-<Button android:id="@+id/find_place" 
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content" 
-            android:layout_below="@id/head"
-            android:text="Find Place" />
-
 <Button android:id="@+id/add_place"    
 			android:layout_width="wrap_content" 
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/find_place"
-            android:layout_alignTop="@id/find_place"
-            android:text="Add Current Location" />
-            
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:text="Add Current Location"
+            android:textColor="#993300" 
+            android:textStyle="bold"/>
+
+<Button android:id="@+id/find_place" 
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content" 
+            android:layout_above="@id/add_place"
+            android:layout_centerHorizontal="true"
+            android:text="Find Place"
+            android:textColor="#993300"
+            android:textStyle="bold"/>            
            
 </RelativeLayout>
 

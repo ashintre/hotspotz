@@ -6,7 +6,11 @@
     <string name="type">Type of Event</string>
     <string name="place">Name of Place</string> 
     <string name="app_name1">hotspotz1</string>
-    <string name="head">HOTSPOTZ by Buzzters</string>   
+    <string name="userid">Enter your Email ID</string>
+    <string name="head">HOTSPOTZ</string>
+    <string name="head_find">FIND PLACES</string>  
+    <string name="head_add">ADD CURRENT LOCATION</string> 
+    <string name="head_contacts">CONTACTS</string> 
     <string name="app_name2">hotspotz_find</string>
     <string name="app_name3">hotspotz_contacts</string>
     <string name="add_current_location">Add Current Location</string>
@@ -14,4 +18,5 @@
     <string name="internalServiceLbl">Internal Hotspotz Service</string>
     <!-- Attributes for the meeting locator service -->
     <string name="internalMeetingServiceLbl">Hotspotz: Meeting locator service</string>
+    <style name="CustomDialogTheme">CustomDialogTheme</style>
 </resources>

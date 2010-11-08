@@ -4,12 +4,29 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/background"
     >
     
-<Button android:id="@+id/back"
+<TextView  
+	android:id="@+id/head_contacts" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:layout_centerHorizontal="true"
+    android:text="@string/head_contacts"
+    android:textSize="20px"
+    android:textColor="#FF7F00"
+    android:textStyle="bold"
+    android:typeface="serif"
+    />  
+    
+<Button android:id="@+id/back2"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content"
-            android:text="Home" />           
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:text="Home" 
+            android:textColor="#993300" 
+            android:textStyle="bold" />           
             
 
 </LinearLayout>

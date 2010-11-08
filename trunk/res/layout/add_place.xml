@@ -3,19 +3,30 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/background"
     >
     
-<Button android:id="@+id/back1"    
-			android:layout_width="wrap_content" 
-            android:layout_height="wrap_content"
-            android:text="Home" />
+<TextView  
+	android:id="@+id/head_add" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:layout_centerHorizontal="true"
+    android:text="@string/head_add"
+    android:textSize="20px"
+    android:textColor="#FF7F00"
+    android:textStyle="bold"
+    android:typeface="serif"
+    />  
+
 <TextView  
 	android:id="@+id/place" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content" 
-    android:layout_below="@id/back1"
+    android:layout_below="@id/head_add"
     android:text="@string/place"
+    android:textColor="#FFA500"
     />
+    
 <EditText android:id="@+id/placetext" 
               android:layout_width="fill_parent" 
               android:layout_height="wrap_content" 
@@ -27,6 +38,7 @@
     android:layout_height="wrap_content" 
     android:layout_below="@id/placetext" 
     android:text="@string/type"
+    android:textColor="#FFA500"
     />
 <AutoCompleteTextView android:id="@+id/autocomplete_typetext1"
         android:layout_width="fill_parent"
@@ -38,15 +50,27 @@
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
             android:layout_below="@id/autocomplete_typetext1"
-            android:text="@string/add_current_location" />
+            android:text="@string/add_current_location"
+            android:textColor="#993300" 
+            android:textStyle="bold" />
 
 <Button android:id="@+id/clear1"    
 			android:layout_width="wrap_content" 
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/add_current_location"
             android:layout_alignTop="@id/add_current_location"
-            android:text="Clear" />
+            android:text="Clear" 
+            android:textColor="#993300" 
+            android:textStyle="bold"/>
             
+<Button android:id="@+id/back1"    
+			android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:text="Home" 
+            android:textColor="#993300" 
+            android:textStyle="bold" />
 
             
 </RelativeLayout>

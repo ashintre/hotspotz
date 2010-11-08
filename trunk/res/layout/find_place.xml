@@ -3,18 +3,28 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@drawable/background"
     >
     
-<Button android:id="@+id/back"
-            android:layout_width="wrap_content" 
-            android:layout_height="wrap_content"
-            android:text="Home" />
+<TextView  
+	android:id="@+id/head_find" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:layout_centerHorizontal="true"
+    android:text="@string/head_find"
+    android:textSize="20px"
+    android:textColor="#FF7F00"
+    android:textStyle="bold"
+    android:typeface="serif"
+    />  
+        
 <TextView  
 	android:id="@+id/name" 
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
-    android:layout_below="@id/back" 
+    android:layout_below="@id/head_find" 
     android:text="@string/name"
+    android:textColor="#FFA500"
     />
 <EditText android:id="@+id/nametext" 
               android:layout_width="fill_parent" 
@@ -27,26 +37,53 @@
     android:layout_height="wrap_content" 
     android:layout_below="@id/nametext" 
     android:text="@string/type"
+    android:textColor="#FFA500"
     />
 <AutoCompleteTextView android:id="@+id/autocomplete_typetext"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:background="@android:drawable/editbox_background"
         android:layout_below="@id/type"/>
+        
+<TextView  
+	android:id="@+id/userid" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:layout_below="@id/autocomplete_typetext" 
+    android:text="@string/userid"
+    android:textColor="#FFA500"
+    />
+<EditText android:id="@+id/userid_text" 
+              android:layout_width="fill_parent" 
+              android:layout_height="wrap_content" 
+              android:background="@android:drawable/editbox_background"
+              android:layout_below="@id/userid" />
     
 <Button android:id="@+id/ok" 
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:layout_below="@id/autocomplete_typetext"
-            android:text="OK" />
+            android:layout_below="@id/userid_text"
+            android:text="OK" 
+            android:textColor="#993300" 
+            android:textStyle="bold"/>
 
 <Button android:id="@+id/clear"    
 			android:layout_width="wrap_content" 
             android:layout_height="wrap_content"
             android:layout_toRightOf="@id/ok"
             android:layout_alignTop="@id/ok"
-            android:text="Clear" />
+            android:text="Clear" 
+            android:textColor="#993300" 
+            android:textStyle="bold"/>
             
+<Button android:id="@+id/back"
+            android:layout_width="wrap_content" 
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:text="Home" 
+            android:textColor="#993300" 
+            android:textStyle="bold"/>
 
             
 </RelativeLayout>
