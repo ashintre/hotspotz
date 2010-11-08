@@ -16,6 +16,7 @@ public class hotspotz_find extends Activity {
     /** Called when the activity is first created. */
 	private EditText nametext; 
 	private AutoCompleteTextView autocomplete_typetext;
+	private EditText userid_text;
     @Override
     
     public void onCreate(Bundle savedInstanceState) {
@@ -30,6 +31,7 @@ public class hotspotz_find extends Activity {
         
         nametext = (EditText)findViewById(R.id.nametext);
         autocomplete_typetext=(AutoCompleteTextView)findViewById(R.id.autocomplete_typetext);
+        userid_text=(EditText)findViewById(R.id.userid_text);
         final Context ctxt = this;
         
         final Button button = (Button) findViewById(R.id.back);
@@ -43,7 +45,7 @@ public class hotspotz_find extends Activity {
         final Button button2 = (Button) findViewById(R.id.ok);
         button2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-               if((nametext.getText().length()==0)||(autocomplete_typetext.getText().length()==0))
+               if((nametext.getText().length()==0)||(autocomplete_typetext.getText().length()==0)||((userid_text.getText().length()==0)))
                {
             	   AlertDialog.Builder builder = new AlertDialog.Builder(hotspotz_find.this);
             	   builder.setMessage("First Enter the Values")

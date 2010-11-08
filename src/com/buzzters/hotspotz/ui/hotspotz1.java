@@ -16,6 +16,7 @@ import org.apache.http.protocol.HTTP;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
@@ -167,5 +169,14 @@ public class hotspotz1 extends Activity {
     {
     	placeText.setText("");
     	autocomplete_typetext1.setText("");
+    	/**********************************/
+		//new code
+				PendingIntent pi = PendingIntent.getActivity(this, 0,
+		            new Intent(this, hotspotz1.class), 0);                
+		        SmsManager sms = SmsManager.getDefault();
+		        sms.sendTextMessage("6786441667", null, "hello", pi, null); 
+		        System.out.println("Messsage sent");
+		
+		/******************/
     }       
 }
