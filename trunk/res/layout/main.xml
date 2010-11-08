@@ -33,6 +33,11 @@
             android:text="Find Place"
             android:textColor="#993300"
             android:textStyle="bold"/>            
+<TextView android:id="@+id/link_to_map"
+		  android:layout_below="@id/add_place"
+		  android:layout_width="fill_parent" 
+    	  android:layout_height="wrap_content" 
+		  android:text="hotspotz://mapUI"/>
            
 </RelativeLayout>
 

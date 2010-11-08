@@ -14,6 +14,9 @@
     <string name="head_contacts">CONTACTS</string> 
     <string name="app_name2">hotspotz_find</string>
     <string name="app_name3">hotspotz_contacts</string>
+    <string name="mapUI">hotspotz_map_activity</string>
+    <string name="inMapUIPage">Came to map UI page</string>
+    <string name="map_linear_layout">Map Linear Layout</string>
     <string name="add_current_location">Add Current Location</string>
     <!-- Attributes for the location service -->
     <string name="internalServiceLbl">Internal Hotspotz Service</string>
