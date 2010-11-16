@@ -1,6 +1,10 @@
 package com.buzzters.hotspotz.ui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.buzzters.hotspotz.Constants;
 
 import android.app.Activity;
 import android.content.ContentResolver;
@@ -22,17 +26,9 @@ public class hotspotz_contacts extends Activity {
 	
 	private LinearLayout linear_view;
 	private int cnt = 0;
-	CheckBox c;
-	ArrayList<CharSequence> arrayList = new ArrayList<CharSequence>();
 	private static ArrayList<String> contactsList = new ArrayList<String>();
-	private static ArrayList<String> contactnumbersList = new ArrayList<String>();
-	
-	//TODO: Contacts List is not getting updated. Fix it.
-	static
-	{
-		contactsList.add("the77thsecret@gmail.com");
-		contactsList.add("adhishbhobe@gmail.com");
-	}
+	private Map<String, String> emailContactNumsMap = new HashMap<String, String>();
+	private HashMap<String, String> selectedEmailContactNumsMap = new HashMap<String, String>();
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -66,8 +62,8 @@ public class hotspotz_contacts extends Activity {
 				cbx.setId(cnt);
 				cbx.setTextColor(Color.rgb(255, 69, 0));
 				linear_view.addView(cbx);
-				emailCur.close();
-				contactnumbersList.add(pCur.getString(7));
+				emailContactNumsMap.put(emailCur.getString(6), pCur.getString(7));
+				emailCur.close();				
 			}
 		}
 		Button btn = new Button(this);
@@ -90,39 +86,28 @@ public class hotspotz_contacts extends Activity {
 		final Button button = (Button) findViewById(1000);
 		button.setOnClickListener(new View.OnClickListener() {
 			public void onClick(View v) {
-				// Current user emailId is on top of the list
-				contactsList.clear();
-				contactsList.add(currentActivity.getIntent().getStringExtra("myEmailId"));
 				find_checked();
 				Intent meetingServiceIntent = new Intent();
 				meetingServiceIntent.putExtra("emailIds", contactsList);
+				meetingServiceIntent.putExtra(Constants.MY_EMAIL_ID, currentActivity.getIntent().getStringExtra(Constants.MY_EMAIL_ID));
+				meetingServiceIntent.putExtra(Constants.EMAIL_CONTACTNUM_MAP, selectedEmailContactNumsMap);
 				// Figure out how to get this value from previous screen
-				meetingServiceIntent.putExtra("tag", currentActivity.getIntent().getStringExtra("tag"));
-				meetingServiceIntent.putExtra("nameOfEvent", currentActivity.getIntent().getStringExtra("nameOfEvent"));
+				meetingServiceIntent.putExtra(Constants.LOCATION_TAG, currentActivity.getIntent().getStringExtra(Constants.LOCATION_TAG));
+				meetingServiceIntent.putExtra(Constants.NAME_OF_EVENT, currentActivity.getIntent().getStringExtra(Constants.NAME_OF_EVENT));
 				meetingServiceIntent.setAction("com.buzzters.hotspotz.service.MeetingLocatorService");
 				currentActivity.startService(meetingServiceIntent);
 			}
-		});
-	//	getGoogleAccount();			
+		});		
 	}
 
 	public void find_checked() {
 		for (int i = 1; i <= cnt; i++) {
-			c = (CheckBox) findViewById(i);
+			CheckBox c = (CheckBox) findViewById(i);
 			if (c.isChecked()) {
-				contactsList.add(c.getText().toString());
+				String selectedEmailId = c.getText().toString();
+				selectedEmailContactNumsMap.put(selectedEmailId, emailContactNumsMap.get(selectedEmailId));				
 			}
 		}
-		System.out.println(contactnumbersList);
 	}	
-	
-	
-	/*private void getGoogleAccount()
-	{
-		AccountManager accManager = (AccountManager)this.getSystemService(ACCOUNT_SERVICE);
-		for(Account acc : accManager.getAccountsByType("com.google"))
-		{
-			Log.i(TAG, "Account Name : " + acc.name + ", Account Type : " + acc.type);
-		}
-	}*/
+		
 }
