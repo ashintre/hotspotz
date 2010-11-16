@@ -13,6 +13,7 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -22,12 +23,15 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.Intent;
 import android.location.Location;
 import android.os.IBinder;
+import android.telephony.SmsManager;
 import android.util.Log;
 
+import com.buzzters.hotspotz.Constants;
 import com.google.android.maps.GeoPoint;
 
 public class MeetingLocatorService extends Service {
@@ -39,13 +43,7 @@ public class MeetingLocatorService extends Service {
 	private static final String USER_DETAIL_DELIMITER = ":";
 
 	private static Map<GeoPoint, String> locationTagDetailsMap = new HashMap<GeoPoint, String>();
-	private static ArrayList<String> contactsList = new ArrayList<String>();
-
-	// TODO: Contacts List is not getting updated. Fix it.
-	static {
-		contactsList.add("the77thsecret@gmail.com");
-		contactsList.add("adhishbhobe@gmail.com");
-	}
+	private HashMap<String, String> selectedEmailContactNumsMap = null;
 
 	@Override
 	public IBinder onBind(Intent intent) {
@@ -56,42 +54,41 @@ public class MeetingLocatorService extends Service {
 	public void onCreate() {
 		super.onCreate();
 	}
-
+	
 	@Override
 	public void onStart(Intent intent, int startId) {		
-		// TODO: Get the contactsList from the intent
-		if(intent.getStringArrayListExtra("emailIds").size() > 1)
-		{
-			// We correctly obtained all contacts list
-			contactsList = intent.getStringArrayListExtra("emailIds");
-		}		
-		List<GeoPoint> friendLocations = determineFriendLocations();
-		String tag = intent.getStringExtra("tag");
+		selectedEmailContactNumsMap = (HashMap<String, String>)intent.getSerializableExtra(Constants.EMAIL_CONTACTNUM_MAP);
+		List<GeoPoint> friendLocations = determineFriendLocations(intent.getStringExtra(Constants.MY_EMAIL_ID));
+		String tag = intent.getStringExtra(Constants.LOCATION_TAG);
 		List<GeoPoint> tagLocations = determineTagLocations(tag);		
 		
 		GeoPoint bestLocationToMeet = computePlace(friendLocations, tagLocations).get(0);
 		String bestRouteMap = getBestRouteForUser(friendLocations.get(0).getLatitudeE6()/1E6, friendLocations.get(0).getLongitudeE6()/1E6,
 									bestLocationToMeet.getLatitudeE6()/1E6, bestLocationToMeet.getLongitudeE6()/1E6);
 		
+		String meetingPlace = locationTagDetailsMap.get(bestLocationToMeet).split(USER_DETAIL_DELIMITER)[1];
+		sendSmsToFriends(buildMessageText(intent, meetingPlace));
+				
 		Intent resultsDisplayIntent = new Intent(getApplication(), com.buzzters.hotspotz.ui.HotSpotzMapUI.class);
 		resultsDisplayIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);		
-		resultsDisplayIntent.putExtra("nameOfEvent", intent.getStringExtra("nameOfEvent"));
-		resultsDisplayIntent.putExtra("nextBusURL", bestRouteMap);
-		resultsDisplayIntent.putExtra("destinationLatitude", Double.valueOf(bestLocationToMeet.getLatitudeE6()/1E6));
-		resultsDisplayIntent.putExtra("destinationLongitude",Double.valueOf(bestLocationToMeet.getLongitudeE6()/1E6));
-		resultsDisplayIntent.putExtra("bestPlaceToMeet", 
-				locationTagDetailsMap.get(bestLocationToMeet).split(USER_DETAIL_DELIMITER)[1]);
+		resultsDisplayIntent.putExtra(Constants.NAME_OF_EVENT, intent.getStringExtra(Constants.NAME_OF_EVENT));
+		resultsDisplayIntent.putExtra(Constants.NEXT_BUS_URL, bestRouteMap);
+		resultsDisplayIntent.putExtra(Constants.DEST_LATITUDE, Double.valueOf(bestLocationToMeet.getLatitudeE6()/1E6));
+		resultsDisplayIntent.putExtra(Constants.DEST_LONGITUDE,Double.valueOf(bestLocationToMeet.getLongitudeE6()/1E6));
+		
+		resultsDisplayIntent.putExtra(Constants.BEST_PLACE_TO_MEET, meetingPlace);
 		getApplication().startActivity(resultsDisplayIntent);
 	}
 
-	private List<GeoPoint> determineFriendLocations() {
+	private List<GeoPoint> determineFriendLocations(String myEmailId) {
 		Scanner responseScanner = null;
 		List<GeoPoint> friendLocations = new ArrayList<GeoPoint>();
 		Log.i(TAG, "In determineFriendLocations");
 		try {
 			StringBuilder urlBuilder = new StringBuilder(
 					HOTSPOTZ_GET_CONTACT_LCNS_URL + "?emailIds=");
-			for (String contact : contactsList) {
+			urlBuilder.append(myEmailId).append(",");
+			for (String contact : selectedEmailContactNumsMap.keySet()) {
 				urlBuilder.append(URLEncoder.encode(contact, "UTF-8")).append(
 						",");
 			}
@@ -313,6 +310,37 @@ public class MeetingLocatorService extends Service {
 			e.printStackTrace();
 			return null;
 		}
+	}
+	
+	private void sendSmsToFriends(final String messageText)
+	{		
+		Thread smsSenderThread = new Thread(messageText){			
+			public void run()
+			{
+				Log.i(Constants.HOTSPOTZ_APP_TAG, "Message text : " + messageText);
+				for(String contactNumber : selectedEmailContactNumsMap.values())
+				{
+					PendingIntent pi = PendingIntent.getActivity(getApplicationContext(), 0, new Intent(getApplicationContext(), MeetingLocatorService.class), 0);                
+				    SmsManager sms = SmsManager.getDefault();
+				    //sms.sendTextMessage(contactNumber, null, messageText, pi, null); 				    
+				}
+			}
+		};
+		smsSenderThread.start();
+	}
+	
+	private String buildMessageText(Intent intent, String meetingPlace)
+	{
+		StringBuilder messageBuilder = new StringBuilder("Hi,\n\n");
+		messageBuilder.append("Your friend ");
+		messageBuilder.append(intent.getStringExtra(Constants.MY_EMAIL_ID));
+		messageBuilder.append(" has invited you for a new Event. The event details are as follows: \n\n");
+		messageBuilder.append("Name Of Event : ").append(intent.getStringExtra(Constants.NAME_OF_EVENT)).append("\n");
+		messageBuilder.append("Type Of Event : ").append(intent.getStringExtra(Constants.LOCATION_TAG)).append("\n");
+		messageBuilder.append("Location : ").append(meetingPlace).append("\n");
+		messageBuilder.append("Happening : NOW");
+		
+		return messageBuilder.toString();
 	}
 
 	@Override
