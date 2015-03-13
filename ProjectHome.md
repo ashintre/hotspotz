@@ -1,0 +1,1 @@
+Find your friends using this Google Android app, and find the closest location to meet up based on a set of tags (like study, assignment, hangout etc...)
